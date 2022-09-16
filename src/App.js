@@ -1,11 +1,12 @@
 import Nav from './components/Nav';
 import './App.css';
+import Home from "./Pages/Home";
+
 
 function App() {
   return (
     <div>
-      <Nav/>
-    
+      <Home/>
     </div>
   );
 }
