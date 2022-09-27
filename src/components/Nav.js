@@ -2,7 +2,8 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-const NavContainer = styled.nav``;
+const NavContainer = styled.nav`
+background:gray;`;
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
@@ -31,6 +32,7 @@ const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0.5em;
+  margin:1em;
 `;
 
 const Searchinput = styled.input`
