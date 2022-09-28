@@ -14,7 +14,7 @@ display: flex;
 justify-content: center;
 align-items:center;
 position:absolute;
-top: 50%; left: ${props => props.direction == "left" ? 1 : 96}%;
+top: 50%; left: ${props => props.direction === "left" ? 1 : 96}%;
 transform: translateY(-50%);
 z-index:200 ;`
 
@@ -83,7 +83,7 @@ cursor: pointer;
 const Slider = () => {
   const [activeIndex, setActiveIndex]=useState(0)
   const handleSlide = (side) => {
-      if (side == "left") {
+      if (side === "left") {
           setActiveIndex(activeIndex>0?activeIndex -1:5)
       }
       else {

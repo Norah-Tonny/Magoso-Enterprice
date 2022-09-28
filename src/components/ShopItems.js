@@ -44,7 +44,7 @@ const ShopItems = () => {
 
             <ShopItemsLeft>
             <ShopItemsHeading>Dresses</ShopItemsHeading>
-            <img src="https://images.pexels.com/photos/6192554/pexels-photo-6192554.jpeg?cs=srgb&dl=pexels-rodnae-productions-6192554.jpg&fm=jpg" width="50%"/>
+            <img src="https://images.pexels.com/photos/6192554/pexels-photo-6192554.jpeg?cs=srgb&dl=pexels-rodnae-productions-6192554.jpg&fm=jpg" width="50%" alt="a dress"/>
             </ShopItemsLeft>
             
             <ShopItemsRight>

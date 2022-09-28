@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { resolveComponentProps } from "@mui/base";
-import { RequestQuoteRounded } from "@mui/icons-material";
+import { db } from "../FireBase";
+import { collection, addDoc } from "firebase/firestore";
+
 const AddProductItemsContainer = styled.div`
   margin: 0 auto;
   width: 50%;
@@ -80,7 +81,7 @@ const AddProductItems = () => {
     productDetailedDescription: "",
     productCategories: "",
     galleryImages: [],
-    onOffer: "Not on Offer",
+    onOffer: "",
   });
 
   const [galleryPreview, setGalleryPreview] = useState([]);
@@ -102,9 +103,9 @@ const AddProductItems = () => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.onload = () => {
-        if (type == "single") {
+        if (type === "single") {
           setImg(fileReader.result);
-          setFormData((prev) => ({ ...prev, ProductImage: fileReader.result }));
+          setFormData((prev) => ({ ...prev, productImage: fileReader.result }));
         } else {
           setFormData((prev) => ({
             ...prev,
@@ -124,6 +125,25 @@ const AddProductItems = () => {
     // };
   };
 
+  const handleAddProduct = async () => {
+    try {
+      await addDoc(collection(db, "products" ), formData);
+      console.log("Product added successfuly!");
+      setFormData({
+        productName: "",
+        productImage: "",
+        productPrice: 0,
+        productDescription: "",
+        productDetailedDescription: "",
+        productCategories: "",
+        galleryImages: [],
+        onOffer: "",
+      })
+    } catch (error) {
+      console.log("error caught: ",error);
+    }
+  };
+
   return (
     <AddProductItemsContainer>
       <Form>
@@ -141,7 +161,6 @@ const AddProductItems = () => {
             setFormData({ ...formData, productDescription: e.target.value })
           }
         />
-
         <Input
           type="Text"
           placeholder="Product Price"
@@ -149,7 +168,6 @@ const AddProductItems = () => {
             setFormData({ ...formData, productPrice: parseInt(e.target.value) })
           }
         />
-
         <Input
           type="Text"
           placeholder="Sale Price"
@@ -157,12 +175,12 @@ const AddProductItems = () => {
             setFormData({ ...formData, salePrice: parseInt(e.target.value) })
           }
         />
-
-        <SelectDropDown onChange={(e) => onOffer(e, "Not On Offer")}>
+        <SelectDropDown  onChange={(e) =>
+            setFormData({ ...formData, onOffer: e.target.value })
+          }>
           <SelectedOptions> On offer</SelectedOptions>
           <SelectedOptions selected>Not on offer</SelectedOptions>
         </SelectDropDown>
-
         <TextArea
           type="Text"
           placeholder="Detailed Description"
@@ -188,11 +206,9 @@ const AddProductItems = () => {
           <SelectedOptions>Decoration</SelectedOptions>
           <SelectedOptions>Sculpture</SelectedOptions>
         </SelectDropDown>
-
         <AddProductItemsLabel>Products images</AddProductItemsLabel>
         <Input type="file" onChange={(e) => images(e, "single")} />
         <AddProductImage src={img} />
-
         <AddProductItemsLabel>Gallery images</AddProductItemsLabel>
         <Input type="file" multiple onChange={(e) => images(e, "multiple")} />
         <div style={{ display: "flex", gap: "2em" }}>
@@ -200,10 +216,9 @@ const AddProductItems = () => {
             return <AddProductImage src={item} />;
           })}
         </div>
-
         <AddProductButton
           type="button"
-          onClick={() => console.log(formData)}
+          onClick={handleAddProduct}
           value="Add Product"
         />
       </Form>
