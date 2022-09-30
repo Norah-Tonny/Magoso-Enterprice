@@ -2,6 +2,7 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from "react-router-dom";
 const NavContainer = styled.nav`
 background:gray;`;
 const Container = styled.div`
@@ -66,9 +67,14 @@ const Nav = () => {
           </Left>
           <Right>
             <NavUl>
-              <NavLi>Shop</NavLi>
-              <NavLi>About</NavLi>
-              <NavLi>Login/register</NavLi>
+            <NavLi><Link to="/home">Home</Link></NavLi>
+              <NavLi><Link to="/shop">Shop</Link></NavLi>
+              <NavLi><Link to="/about">About</Link></NavLi>
+              <NavLi><Link to="/login">Login/register</Link></NavLi>
+              <NavLi><Link to="/singleProduct">SingleProduct</Link></NavLi>
+              <NavLi><Link to="/contact">Contact</Link></NavLi>
+              <NavLi><Link to="/addProduct">AddProduct</Link></NavLi>
+              
               <NavLi>
                 {" "}
                 <Badge badgeContent={1} color="primary">

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { db } from "../FireBase";
 import { collection, addDoc } from "firebase/firestore";
+import { gestStorage, getStorage, ref, uploadString } from "firebase/storage";
 
 const AddProductItemsContainer = styled.div`
   margin: 0 auto;
@@ -100,17 +101,30 @@ const AddProductItems = () => {
 
     const files = e.target.files;
     Array.from(files).forEach((file) => {
+      const storage = getStorage();
+      const storageRef = ref(storage, file.name);
+      console.log(file.name);
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.onload = () => {
         if (type === "single") {
+          uploadString(storageRef, fileReader.result, "data_url").then(
+            (snapshot) => {
+              console.log("image uploaded");
+              setFormData((prev) => ({ ...prev, productImage:`https://firebasestorage.googleapis.com/v0/b/magoso-enterprice.appspot.com/o/ ${file.name}?alt=media`}));
+            }
+          );
           setImg(fileReader.result);
-          setFormData((prev) => ({ ...prev, productImage: fileReader.result }));
         } else {
-          setFormData((prev) => ({
-            ...prev,
-            galleryImages: [...prev.galleryImages, fileReader.result],
-          }));
+          uploadString(storageRef, fileReader.result, "data_url").then(
+            (snapshot) => {
+              console.log("image uploaded");
+              setFormData((prev) => ({
+                ...prev,
+                galleryImages: [...prev.galleryImages,`https://firebasestorage.googleapis.com/v0/b/magoso-enterprice.appspot.com/o/ ${file.name}?alt=media`]
+              }));
+            }
+          );
           setGalleryPreview((prev) => [...prev, fileReader.result]);
         }
       };
@@ -127,7 +141,7 @@ const AddProductItems = () => {
 
   const handleAddProduct = async () => {
     try {
-      await addDoc(collection(db, "products" ), formData);
+      await addDoc(collection(db, "products"), formData);
       console.log("Product added successfuly!");
       setFormData({
         productName: "",
@@ -138,9 +152,9 @@ const AddProductItems = () => {
         productCategories: "",
         galleryImages: [],
         onOffer: "",
-      })
+      });
     } catch (error) {
-      console.log("error caught: ",error);
+      console.log("error caught: ", error);
     }
   };
 
@@ -175,9 +189,11 @@ const AddProductItems = () => {
             setFormData({ ...formData, salePrice: parseInt(e.target.value) })
           }
         />
-        <SelectDropDown  onChange={(e) =>
+        <SelectDropDown
+          onChange={(e) =>
             setFormData({ ...formData, onOffer: e.target.value })
-          }>
+          }
+        >
           <SelectedOptions> On offer</SelectedOptions>
           <SelectedOptions selected>Not on offer</SelectedOptions>
         </SelectDropDown>

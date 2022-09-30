@@ -1,5 +1,5 @@
 
-const About = ()=>{
+const AboutItem = ()=>{
     
     return <>
         <p>we offer every
@@ -7,4 +7,4 @@ const About = ()=>{
 prodiucts from African</p>
   </>
 };
-export default About;
+export default AboutItem;

@@ -10,7 +10,9 @@ margin:1.5em;`
 const Categories = () => {
     return (
         <>
+    
         <CategoriesHeading>Browse Categories</CategoriesHeading>
+        
             <CategoriesItem />
         </>
     )

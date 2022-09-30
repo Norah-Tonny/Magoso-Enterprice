@@ -1,85 +1,107 @@
-
-import styled from "styled-components"
+import styled from "styled-components";
 
 const ShopItemsContainer = styled.div`
+  display:flex;
+  // width: 85%;
+  margin: 0 auto;
+  background-color: silver;
+`;
+
+const ShopItemsLeft = styled.div``;
+
+const ShopItemsRight = styled.div`
 display:flex;
-// width: 85%;
-margin: 0 auto;
-background-color:silver;`
+gap:3;
 
+`;
 
-const ShopItemsLeft=styled.div``
+const ShopItemsHeading = styled.h1`
+  padding: 2em;
+`;
+const ShopSize = styled.div``
+const ShopPrice = styled.div``
+const ShopColor = styled.div``
+const ShopItemsParagraph = styled.p`
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 2em;
+  padding-right: 20em;
+`;
+// const SelectedOption=styled.select``
+const ShopItemsColor = styled.select``;
+const SelectedOptionColor = styled.option``;
+const SelectedOptionPrice = styled.option``;
 
+const SelectedOptionSize = styled.option`
+padding:1em 2em;
+display:flex;`;
 
-const ShopItemsRight=styled.div``
+const ShopItemsSize = styled.select``;
 
-
-const ShopItemsHeading = styled.h1``
-
-
-
-const ShopItemsParagraph = styled.p``
-
-
-const ShopItemsColor = styled.select``
-
-
-
-const SelectedOption = styled.option``
-
-
-const ShopItemsSize = styled.select``
-
-
-const ShopItemsPrice = styled.select``
-
-
-
-
+const ShopItemsPrice = styled.select``;
 
 const ShopItems = () => {
-    return (
-        <ShopItemsContainer>
-            
+  return (
+    <ShopItemsContainer>
+      <ShopItemsLeft>
+        <ShopItemsHeading>Attire</ShopItemsHeading>
+        <img
+          src="https://images.pexels.com/photos/6192554/pexels-photo-6192554.jpeg?cs=srgb&dl=pexels-rodnae-productions-6192554.jpg&fm=jpg"
+          width="50%"
+          alt="a dress"
+        />
+      </ShopItemsLeft>
 
-            <ShopItemsLeft>
-            <ShopItemsHeading>Dresses</ShopItemsHeading>
-            <img src="https://images.pexels.com/photos/6192554/pexels-photo-6192554.jpeg?cs=srgb&dl=pexels-rodnae-productions-6192554.jpg&fm=jpg" width="50%" alt="a dress"/>
-            </ShopItemsLeft>
-            
-            <ShopItemsRight>
-            <ShopItemsParagraph>Filter Product:Size</ShopItemsParagraph>
+          <ShopItemsRight>
+          <ShopSize>
+ 
+              
+                  <ShopItemsParagraph>Filter Product:Size
+                      <span>
+                          <ShopItemsSize>
+          <SelectedOptionSize disable selescted>
+            Size
+          </SelectedOptionSize>
+          <SelectedOptionSize>S</SelectedOptionSize>
+          <SelectedOptionSize>M</SelectedOptionSize>
+          <SelectedOptionSize>L</SelectedOptionSize>
+          <SelectedOptionSize>XL</SelectedOptionSize>
+          <SelectedOptionSize>XXL</SelectedOptionSize>
+              </ShopItemsSize>
+                      </span>
+              </ShopItemsParagraph>
+  
+                      </ShopSize>
 
-            <ShopItemsSize>
-        <SelectedOption disable selescted>Size</SelectedOption>
-           <SelectedOption >S</SelectedOption>
-           <SelectedOption >M</SelectedOption>
-            <SelectedOption>L</SelectedOption>
-            <SelectedOption>XL</SelectedOption>
-            <SelectedOption>XXL</SelectedOption>
-            </ShopItemsSize>
+ 
+
+              <ShopColor>
+                  <ShopItemsColor>
+          <SelectedOptionColor disable selescted>
+            color
+          </SelectedOptionColor>
+          <SelectedOptionColor>White</SelectedOptionColor>
+          <SelectedOptionColor>Black</SelectedOptionColor>
+          <SelectedOptionColor>green</SelectedOptionColor>
+          <SelectedOptionColor>Red</SelectedOptionColor>
+          <SelectedOptionColor>Blue</SelectedOptionColor>
+              </ShopItemsColor>
+              </ShopColor>
 
 
-            <ShopItemsColor>
-                <SelectedOption disable selescted>color</SelectedOption>
-           <SelectedOption >White</SelectedOption>
-           <SelectedOption >Black</SelectedOption>
-            <SelectedOption>green</SelectedOption>
-            <SelectedOption>Red</SelectedOption>
-            <SelectedOption>Blue</SelectedOption>
-            </ShopItemsColor>
+<ShopPrice>
+        <ShopItemsPrice>
+          <ShopItemsParagraph>Filter Product:Price</ShopItemsParagraph>
+          <SelectedOptionPrice disable selescted>
+            Price
+          </SelectedOptionPrice>
+          <SelectedOptionPrice>Highest to Lowest</SelectedOptionPrice>
+          <SelectedOptionPrice>Lowest to Highest</SelectedOptionPrice>
+              </ShopItemsPrice>
+              </ShopPrice>
 
-
-            <ShopItemsPrice>
-            <ShopItemsParagraph>Filter Product:Price</ShopItemsParagraph>
-           <SelectedOption disable selescted>Price</SelectedOption>
-           <SelectedOption >Highest to Lowest</SelectedOption>
-           <SelectedOption >Lowest to Highest</SelectedOption>
-           </ShopItemsPrice>
-
-           </ShopItemsRight>
+      </ShopItemsRight>
     </ShopItemsContainer>
-
-    )
-}
+  );
+};
 export default ShopItems;
